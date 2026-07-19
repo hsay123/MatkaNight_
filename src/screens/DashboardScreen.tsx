@@ -175,12 +175,12 @@ export function DashboardScreen() {
 
             {/* Zone Odds — mint green */}
             <div className="relative overflow-hidden z-0 text-slate-900 rounded-2xl p-6 shadow-sm">
-              {/* Rotated Background Image Layer */}
+              {/* Maximum Compressed Background Layer */}
               <div 
-                className="absolute -inset-[50%] -z-10 bg-cover bg-center -rotate-90 opacity-90"
+                className="absolute top-1/2 left-1/2 w-full aspect-square -translate-x-1/2 -translate-y-1/2 -z-10 -rotate-90 opacity-[0.85] bg-[size:100%_100%]"
                 style={{ backgroundImage: `url(${greenGradient})` }}
               />
-              <h3 className="font-[family-name:var(--font-display)] font-semibold text-sm text-slate-600 mb-3 uppercase tracking-wider">Zone Odds</h3>
+              <h3 className="font-[family-name:var(--font-display)] font-bold text-sm text-black dark:text-white mb-3 uppercase tracking-wider">Zone Odds</h3>
               <div className="space-y-2">
                 {[
                   { zone: 'Face Cards (J/Q/K)', odds: '3.5x', color: 'text-[#5047e4]' },
@@ -189,8 +189,8 @@ export function DashboardScreen() {
                   { zone: 'Red (♥/♦)', odds: '2.0x', color: 'text-[#E24B4A]' },
                   { zone: 'Black (♠/♣)', odds: '2.0x', color: 'text-slate-900' },
                 ].map((row) => (
-                  <div key={row.zone} className="flex items-center justify-between py-1.5 border-b border-slate-200/50 last:border-0">
-                    <span className="text-sm text-slate-700">{row.zone}</span>
+                  <div key={row.zone} className="flex items-center justify-between py-1.5 border-b border-black/20 dark:border-white/20 last:border-0">
+                    <span className="text-sm font-semibold text-black dark:text-white">{row.zone}</span>
                     <span className={`text-sm font-bold ${row.color}`}>{row.odds}</span>
                   </div>
                 ))}
