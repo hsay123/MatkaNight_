@@ -3,6 +3,7 @@ import { GameHUD } from '../components/layout/GameHUD';
 import { Button } from '../components/ui/Button';
 import { useGameStore } from '../store/gameStore';
 import type { RoundResult } from '../lib/midnight/types';
+import bgGradient from '../assets/blueg.png';
 
 function RoundHistoryCard({ round }: { round: RoundResult }) {
   const timeAgo = Math.floor((Date.now() - round.timestamp) / 60000);
@@ -68,7 +69,8 @@ export function DashboardScreen() {
 
             {/* Start a New Round — light purple */}
             <motion.div
-              className="bg-[#F0F0FA] text-slate-900 rounded-2xl py-12 md:py-16 px-8 shadow-sm flex flex-col items-center justify-center text-center gap-4 cursor-pointer group"
+              className="relative overflow-hidden bg-cover bg-center bg-no-repeat text-slate-900 rounded-2xl py-12 md:py-16 px-8 shadow-sm flex flex-col items-center justify-center text-center gap-4 cursor-pointer group"
+              style={{ backgroundImage: `url(${bgGradient})` }}
               whileHover={{ scale: 1.01 }}
               onClick={() => setScreen('zone_selection')}
             >
