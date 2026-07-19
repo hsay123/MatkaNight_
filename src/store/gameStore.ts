@@ -174,16 +174,13 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
     try {
       const zonesHash = crypto.getRandomValues(new Uint8Array(32));
       const nonce = Date.now();
-      const seedHash = crypto.getRandomValues(new Uint8Array(32));
-      const result = await contractService.placeBetAndCommitSeed(zonesHash, BigInt(totalAmount), BigInt(nonce), seedHash);
+      const result = await contractService.placeBet(zonesHash, BigInt(totalAmount), BigInt(nonce));
 
       // Refresh balances from chain immediately after transaction
       await walletService.deductBalance(totalAmount);
       const updatedWallet = walletService.getState();
 
       console.log('[MatkaNight:placeBet] Balance after deduct → NIGHT:', updatedWallet.nightBalance, '| DUST:', updatedWallet.dustBalance);
-
-      const seedHashString = Array.from(seedHash).map(b => b.toString(16).padStart(2, '0')).join('');
 
       set({
         wallet: updatedWallet,
@@ -197,7 +194,7 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
           isWin: false,
           commitmentHash: result.commitmentHash,
           revealedSeed: '',
-          shuffleSeed: seedHashString,
+          shuffleSeed: '',
           timestamp: Date.now(),
           verificationStatus: 'pending',
         },
@@ -214,10 +211,25 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
 
   commitSeed: async () => {
     set({ currentScreen: 'shuffle_seed' });
-    // Seed was already committed on-chain during placeBetAndCommitSeed.
-    // Add a short delay so the shuffle_seed screen is visible to the user.
-    await new Promise(r => setTimeout(r, 900));
-    set({ currentScreen: 'shuffle_animation' });
+    try {
+      const seedHash = crypto.getRandomValues(new Uint8Array(32));
+      await contractService.commitShuffleSeed(seedHash);
+      const round = get().currentRound;
+      const seedHashString = Array.from(seedHash).map(b => b.toString(16).padStart(2, '0')).join('');
+      if (round) {
+        set({
+          currentRound: { ...round, shuffleSeed: seedHashString },
+          currentScreen: 'shuffle_animation',
+        });
+      }
+    } catch (err: any) {
+      console.error('[MatkaNight:commitSeed] Error:', err);
+      let errorMsg = err?.message || 'Shuffle seed commitment failed.';
+      if (err?.message?.includes('timed out')) {
+        errorMsg = 'Transaction timed out. Please check your wallet.';
+      }
+      set({ currentScreen: 'bet_committed', toast: { message: errorMsg, type: 'error' } });
+    }
   },
 
   revealAndSettle: async () => {

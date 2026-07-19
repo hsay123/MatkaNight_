@@ -259,47 +259,6 @@ export const contractService = {
     };
   },
 
-  async placeBetAndCommitSeed(
-    zonesHash: Uint8Array,
-    totalAmount: bigint,
-    nonce: bigint,
-    seedHash: Uint8Array,
-  ): Promise<{ commitmentHash: string; txHash: string }> {
-    if (!cachedConnectedAPI) {
-      throw new Error('Contract not initialized. Call contractService.initialize() first.');
-    }
-
-    console.log('[MatkaNight:contract] Calling placeBetAndCommitSeed circuit...', {
-      zonesHashLength: zonesHash.length,
-      totalAmount: totalAmount.toString(),
-      nonce: nonce.toString(),
-      seedHashLength: seedHash.length,
-    });
-
-    const { submitCallTxAsync } = await loadSdkModules();
-    const providers = await buildProviderStack(cachedConnectedAPI);
-    const compiledContract = await getCompiledContract();
-
-    const txData = await submitCallTxAsync(providers as any, {
-      compiledContract,
-      contractAddress: CONTRACT_ADDRESS,
-      circuitId: 'placeBetAndCommitSeed',
-      args: [zonesHash, toAtomicNight(Number(totalAmount)), nonce, seedHash],
-    });
-
-    console.log('[MatkaNight:contract] placeBetAndCommitSeed succeeded:', {
-      txHash: txData.txId,
-    });
-
-    // Wait for indexer to reflect the new betCommitment before returning
-    await waitForLedgerField('betCommitment', zonesHash, 'betCommitment');
-
-    return {
-      commitmentHash: Array.from(zonesHash).map(b => b.toString(16).padStart(2, '0')).join(''),
-      txHash: txData.txId,
-    };
-  },
-
   async commitShuffleSeed(seedHash: Uint8Array): Promise<{ txHash: string }> {
     if (!cachedConnectedAPI) {
       throw new Error('Contract not initialized. Call contractService.initialize() first.');
