@@ -75,6 +75,46 @@
       }
     },
     {
+      "name": "placeBetAndCommitSeed",
+      "pure": false,
+      "proof": true,
+      "arguments": [
+        {
+          "name": "zonesHash",
+          "type": {
+            "type-name": "Bytes",
+            "length": 32
+          }
+        },
+        {
+          "name": "totalAmount",
+          "type": {
+            "type-name": "Uint",
+            "maxval": 340282366920938463463374607431768211455
+          }
+        },
+        {
+          "name": "nonce",
+          "type": {
+            "type-name": "Uint",
+            "maxval": 18446744073709551615
+          }
+        },
+        {
+          "name": "seedHash",
+          "type": {
+            "type-name": "Bytes",
+            "length": 32
+          }
+        }
+      ],
+      "result-type": {
+        "type-name": "Tuple",
+        "types": [
+        ]
+      }
+    },
+    {
       "name": "revealAndSettle",
       "pure": false,
       "proof": true,

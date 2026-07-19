@@ -12,6 +12,11 @@ export type ImpureCircuits<PS> = {
            nonce_0: bigint): __compactRuntime.CircuitResults<PS, []>;
   commitShuffleSeed(context: __compactRuntime.CircuitContext<PS>,
                     seedHash_0: Uint8Array): __compactRuntime.CircuitResults<PS, []>;
+  placeBetAndCommitSeed(context: __compactRuntime.CircuitContext<PS>,
+                        zonesHash_0: Uint8Array,
+                        totalAmount_0: bigint,
+                        nonce_0: bigint,
+                        seedHash_0: Uint8Array): __compactRuntime.CircuitResults<PS, []>;
   revealAndSettle(context: __compactRuntime.CircuitContext<PS>,
                   revealedZonesHash_0: Uint8Array,
                   drawnCardRank_0: bigint,
@@ -29,6 +34,11 @@ export type ProvableCircuits<PS> = {
            nonce_0: bigint): __compactRuntime.CircuitResults<PS, []>;
   commitShuffleSeed(context: __compactRuntime.CircuitContext<PS>,
                     seedHash_0: Uint8Array): __compactRuntime.CircuitResults<PS, []>;
+  placeBetAndCommitSeed(context: __compactRuntime.CircuitContext<PS>,
+                        zonesHash_0: Uint8Array,
+                        totalAmount_0: bigint,
+                        nonce_0: bigint,
+                        seedHash_0: Uint8Array): __compactRuntime.CircuitResults<PS, []>;
   revealAndSettle(context: __compactRuntime.CircuitContext<PS>,
                   revealedZonesHash_0: Uint8Array,
                   drawnCardRank_0: bigint,
@@ -49,6 +59,11 @@ export type Circuits<PS> = {
            nonce_0: bigint): __compactRuntime.CircuitResults<PS, []>;
   commitShuffleSeed(context: __compactRuntime.CircuitContext<PS>,
                     seedHash_0: Uint8Array): __compactRuntime.CircuitResults<PS, []>;
+  placeBetAndCommitSeed(context: __compactRuntime.CircuitContext<PS>,
+                        zonesHash_0: Uint8Array,
+                        totalAmount_0: bigint,
+                        nonce_0: bigint,
+                        seedHash_0: Uint8Array): __compactRuntime.CircuitResults<PS, []>;
   revealAndSettle(context: __compactRuntime.CircuitContext<PS>,
                   revealedZonesHash_0: Uint8Array,
                   drawnCardRank_0: bigint,
