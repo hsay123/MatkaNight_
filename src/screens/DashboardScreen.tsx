@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { GameHUD } from '../components/layout/GameHUD';
 import { Button } from '../components/ui/Button';
+import { SelectZonesButton } from '../components/ui/select-zones-button';
 import { useGameStore } from '../store/gameStore';
 import type { RoundResult } from '../lib/midnight/types';
 import bgGradient from '../assets/blueg.png';
@@ -89,15 +90,7 @@ export function DashboardScreen() {
                 Every shuffle is verified by zero-knowledge proofs.
               </p>
               <div className="mt-6 text-center">
-                <button className="group flex items-center justify-between gap-4 bg-[#5047e4] hover:bg-[#433ac4] text-white rounded-full pl-6 pr-2 py-2 transition-all duration-300 shadow-md">
-                  <span className="font-medium text-sm md:text-base">Select Zones</span>
-                  <div className="bg-white text-[#5047e4] rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14"></path>
-                      <path d="m12 5 7 7-7 7"></path>
-                    </svg>
-                  </div>
-                </button>
+                <SelectZonesButton />
               </div>
             </motion.div>
 
