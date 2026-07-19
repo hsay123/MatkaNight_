@@ -116,7 +116,7 @@ export function LandingScreen() {
       <section
         ref={heroRef}
         onMouseMove={handleMouseMove}
-        className="relative z-10 min-h-[80vh] flex flex-col items-center justify-center px-6 overflow-hidden"
+        className="relative z-10 min-h-screen w-full flex flex-col items-center justify-center py-16 px-4 overflow-hidden"
       >
         {/* 4 Floating playing cards — absolute, z-0, pointer-events-none */}
         {HERO_CARDS.map((card, i) => (
@@ -158,23 +158,24 @@ export function LandingScreen() {
 
         {/* Centered hero copy */}
         <div className="relative z-10 flex flex-col items-center text-center max-w-4xl pointer-events-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-pulse/10 border border-indigo-pulse/20 text-indigo-pulse text-xs font-medium mb-8">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-pulse animate-pulse" />
-              Built on Midnight Network
-            </div>
-          </motion.div>
+          <div className="flex flex-col items-center gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-pulse/10 border border-indigo-pulse/20 text-indigo-pulse text-xs font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-pulse animate-pulse" />
+                Built on Midnight Network
+              </div>
+            </motion.div>
 
-          <motion.h1
-            className="font-[family-name:var(--font-display)] font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-silver-light leading-[1.1] mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
+            <motion.h1
+              className="font-[family-name:var(--font-display)] font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-silver-light leading-[1.1]"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
             One Card.
             <br />
             Provably Fair.
@@ -196,6 +197,7 @@ export function LandingScreen() {
               <span>.</span>
             </span>
           </motion.h1>
+          </div>
 
           <motion.p
             className="text-silver-mist text-base sm:text-lg md:text-xl max-w-2xl mb-10 leading-relaxed"
