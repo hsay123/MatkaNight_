@@ -1,0 +1,20 @@
+// Implements PRD §8.2 (Treasury & House Balance)
+pragma language_version >= 0.23.0;
+
+export ledger houseBalance: Uint<128>;
+
+// Initialize the treasury with a starting balance
+export circuit initializeTreasury(initialBalance: Uint<128>): [] {
+    houseBalance = disclose(initialBalance);
+}
+
+// Records a bet already received by the top-level game circuit.
+export circuit escrowBet(amount: Uint<128>): [] {
+    houseBalance = disclose((houseBalance + amount) as Uint<128>);
+}
+
+// Records a payout already sent by the top-level game circuit.
+export circuit processPayout(amount: Uint<128>): [] {
+    assert(disclose(houseBalance >= amount), "Insufficient house balance for payout");
+    houseBalance = disclose((houseBalance - amount) as Uint<128>);
+}

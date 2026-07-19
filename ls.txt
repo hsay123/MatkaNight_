@@ -1,0 +1,47 @@
+matkanight@0.0.0 /home/yashh/Downloads/MatkaNight
+├─┬ @midnight-ntwrk/midnight-js-contracts@4.1.1
+│ ├── @midnight-ntwrk/midnight-js-network-id@4.1.1 deduped
+│ ├─┬ @midnight-ntwrk/midnight-js-protocol@4.1.1
+│ │ ├─┬ @midnight-ntwrk/compact-js@2.5.1
+│ │ │ └── @midnight-ntwrk/ledger-v8@8.1.0 deduped
+│ │ └── @midnight-ntwrk/ledger-v8@8.1.0 deduped
+│ └─┬ @midnight-ntwrk/midnight-js-utils@4.1.1
+│   ├── @midnight-ntwrk/midnight-js-network-id@4.1.1 deduped
+│   └─┬ @midnight-ntwrk/wallet-sdk-address-format@3.1.2
+│     └── @midnight-ntwrk/ledger-v8@8.1.0 deduped
+├─┬ @midnight-ntwrk/midnight-js-http-client-proof-provider@4.1.1
+│ ├── @midnight-ntwrk/midnight-js-contracts@4.1.1 deduped
+│ └── @midnight-ntwrk/midnight-js-network-id@4.1.1 deduped
+├─┬ @midnight-ntwrk/midnight-js-indexer-public-data-provider@4.1.1
+│ └── @midnight-ntwrk/midnight-js-network-id@4.1.1 deduped
+├── @midnight-ntwrk/midnight-js-network-id@4.1.1
+├─┬ @midnight-ntwrk/midnight-js@4.1.1
+│ ├── @midnight-ntwrk/midnight-js-contracts@4.1.1 deduped
+│ └── @midnight-ntwrk/midnight-js-network-id@4.1.1 deduped
+├─┬ @midnight-ntwrk/testkit-js@4.1.1
+│ ├── @midnight-ntwrk/midnight-js-contracts@4.1.1 deduped
+│ ├── @midnight-ntwrk/midnight-js-network-id@4.1.1 deduped
+│ └─┬ @midnight-ntwrk/wallet-sdk-prover-client@1.2.2
+│   └── @midnight-ntwrk/ledger-v8@8.1.0 deduped
+├─┬ @midnight-ntwrk/wallet-sdk-facade@4.0.1
+│ ├── @midnight-ntwrk/ledger-v8@8.1.0
+│ ├─┬ @midnight-ntwrk/wallet-sdk-address-format@3.1.2
+│ │ └── @midnight-ntwrk/ledger-v8@8.1.0 deduped
+│ ├─┬ @midnight-ntwrk/wallet-sdk-capabilities@3.3.1
+│ │ └── @midnight-ntwrk/ledger-v8@8.1.0 deduped
+│ ├─┬ @midnight-ntwrk/wallet-sdk-dust-wallet@4.1.0
+│ │ ├── @midnight-ntwrk/ledger-v8@8.1.0 deduped
+│ │ └─┬ @midnight-ntwrk/wallet-sdk-address-format@3.1.2
+│ │   └── @midnight-ntwrk/ledger-v8@8.1.0 deduped
+│ ├─┬ @midnight-ntwrk/wallet-sdk-shielded@3.0.1
+│ │ ├── @midnight-ntwrk/ledger-v8@8.1.0 deduped
+│ │ └─┬ @midnight-ntwrk/wallet-sdk-address-format@3.1.2
+│ │   └── @midnight-ntwrk/ledger-v8@8.1.0 deduped
+│ └─┬ @midnight-ntwrk/wallet-sdk-unshielded-wallet@3.1.0
+│   ├── @midnight-ntwrk/ledger-v8@8.1.0 deduped
+│   └─┬ @midnight-ntwrk/wallet-sdk-address-format@3.1.2
+│     └── @midnight-ntwrk/ledger-v8@8.1.0 deduped
+└─┬ @midnight-ntwrk/wallet-sdk@1.1.0
+  └─┬ @midnight-ntwrk/wallet-sdk-address-format@3.1.2
+    └── @midnight-ntwrk/ledger-v8@8.1.0 deduped
+

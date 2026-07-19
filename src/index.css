@@ -1,0 +1,372 @@
+@import "tailwindcss";
+@custom-variant dark (&:is([data-theme='dark'] *));
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/dm-serif-display/400-italic.css";
+
+/* ─── MatkaNight Design Tokens ─── */
+@theme {
+  --color-void: #0B0B14;
+  --color-obsidian: #151521;
+  --color-surface-2: #1C1C2E;
+  --color-surface-3: #252540;
+  --color-surface-4: #2E2E4A;
+  --color-indigo-pulse: #4F46E5;
+  --color-indigo-dim: #3730A3;
+  --color-indigo-glow: rgba(79, 70, 229, 0.15);
+  --color-neon-teal: #0F6E56;
+  --color-teal-bright: #10B981;
+  --color-teal-glow: rgba(15, 110, 86, 0.2);
+  --color-ember: #E24B4A;
+  --color-ember-glow: rgba(226, 75, 74, 0.15);
+  --color-silver-mist: #A0A0B8;
+  --color-silver-light: #D1D1E0;
+  --color-cream: #F0EDE6;
+  --color-gold-dim: #B8860B;
+  --color-gold-bright: #DAA520;
+
+  --font-display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", "JetBrains Mono Variable", monospace;
+  --font-accent: "DM Serif Display", Georgia, serif;
+}
+
+/* ─── Global Resets ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-body);
+  color: var(--color-silver-light);
+  background: var(--color-void);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html[data-theme="light"] {
+  background: #ffffff;
+  color: #1e293b;
+}
+
+html[data-theme="dark"] {
+  background: var(--color-void);
+  color: var(--color-silver-light);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ─── Noise Grain Overlay ─── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-indigo-pulse);
+}
+
+/* ─── Focus Rings ─── */
+:focus-visible {
+  outline: 2px solid var(--color-indigo-pulse);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: rgba(79, 70, 229, 0.3);
+  color: white;
+}
+
+/* ─── Light Theme Overrides ─── */
+[data-theme="light"] {
+  --color-void: #F5F3F0;
+  --color-obsidian: #FFFFFF;
+  --color-surface-2: #ECEAE4;
+  --color-surface-3: #DDD9D0;
+  --color-surface-4: #C8C4BB;
+  --color-silver-light: #2A2A3C;
+  --color-silver-mist: #6B6B80;
+  --color-cream: #2A2A3C;
+
+  color: var(--color-silver-light);
+  background: var(--color-void);
+}
+
+[data-theme="light"] .glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(79, 70, 229, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .foil-border::before {
+  background: linear-gradient(135deg, #DDD9D0, #4F46E5, #DDD9D0);
+}
+
+[data-theme="light"] .glow-indigo {
+  box-shadow: inset 0 0 30px rgba(79, 70, 229, 0.06),
+    0 0 40px rgba(79, 70, 229, 0.04);
+}
+[data-theme="light"] .glow-teal {
+  box-shadow: inset 0 0 30px rgba(15, 110, 86, 0.08),
+    0 0 40px rgba(15, 110, 86, 0.05);
+}
+[data-theme="light"] .glow-ember {
+  box-shadow: inset 0 0 30px rgba(226, 75, 74, 0.08),
+    0 0 40px rgba(226, 75, 74, 0.05);
+}
+
+[data-theme="light"] .terminal-text {
+  background: rgba(79, 70, 229, 0.06);
+  border-color: rgba(79, 70, 229, 0.12);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: var(--color-surface-3);
+}
+[data-theme="light"] ::selection {
+  background: rgba(79, 70, 229, 0.2);
+  color: #2A2A3C;
+}
+
+[data-theme="light"] body::before {
+  opacity: 0.025;
+}
+
+/* ─── Hero Floating Cards ─── */
+.hero-card {
+  background: linear-gradient(135deg, #1e1c38, #252540);
+  border: 1px solid rgba(84, 66, 220, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 24px rgba(84, 66, 220, 0.08);
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+[data-theme="dark"] .hero-card {
+  background: linear-gradient(135deg, #ffffff, #f1f5f9);
+  border: 1px solid rgba(84, 66, 220, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+/* ─── Card 3D Perspective ─── */
+.card-perspective {
+  perspective: 1200px;
+}
+
+.card-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease;
+}
+
+.card-face {
+  backface-visibility: hidden;
+}
+
+.card-back {
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+}
+
+/* ─── Glassmorphism Panel ─── */
+.glass-panel {
+  background: rgba(21, 21, 33, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(79, 70, 229, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Foil Edge Border ─── */
+.foil-border {
+  position: relative;
+}
+.foil-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #2A2A40, #4F46E5, #2A2A40);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ─── Glow Effects ─── */
+.glow-indigo {
+  box-shadow: inset 0 0 30px rgba(79, 70, 229, 0.08),
+    0 0 40px rgba(79, 70, 229, 0.06);
+}
+.glow-teal {
+  box-shadow: inset 0 0 30px rgba(15, 110, 86, 0.12),
+    0 0 40px rgba(15, 110, 86, 0.08);
+}
+.glow-ember {
+  box-shadow: inset 0 0 30px rgba(226, 75, 74, 0.12),
+    0 0 40px rgba(226, 75, 74, 0.08);
+}
+
+/* ─── Hash/Proof Terminal Style ─── */
+.terminal-text {
+  font-family: var(--font-mono);
+  background: rgba(79, 70, 229, 0.08);
+  border: 1px solid rgba(79, 70, 229, 0.15);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--color-silver-mist);
+  word-break: break-all;
+}
+
+/* ─── Hero Card Float ─── */
+@keyframes hero-card-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ─── Hero Background Gradient ─── */
+.hero-bg-gradient {
+  background: radial-gradient(
+    var(--grad-size) at var(--grad-pos),
+    #ffffff var(--grad-stop),
+    #d8b4fe 100%
+  );
+  transition: background 0.4s ease;
+}
+
+[data-theme="dark"] .hero-bg-gradient {
+  background: radial-gradient(
+    var(--grad-size) at var(--grad-pos),
+    #131127 var(--grad-stop),
+    #2a2456 100%
+  );
+}
+
+/* ─── Hero Dotted Noise Background ─── */
+.hero-noise-bg {
+  background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.15) 1px, transparent 0);
+  background-size: 20px 20px;
+  transition: background-image 0.4s ease;
+}
+
+[data-theme="dark"] .hero-noise-bg {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.1) 1px, transparent 0);
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Italic Serif Accent ─── */
+.font-accent {
+  font-family: var(--font-accent);
+}
+
+/* ─── Tactile Active Feedback ─── */
+.tactile-active:active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease;
+}
+
+/* ─── Responsive Breakpoints (utility classes) ─── */
+.responsive-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ─── Streak Pulse Animation ─── */
+@keyframes streakPulse {
+  0%,
+  100% {
+    filter: brightness(1) drop-shadow(0 0 4px rgba(226, 75, 74, 0.3));
+  }
+  50% {
+    filter: brightness(1.3) drop-shadow(0 0 12px rgba(226, 75, 74, 0.6));
+  }
+}
+.streak-pulse {
+  animation: streakPulse 1.5s ease-in-out infinite;
+}
+
+/* ─── Confetti Keyframes ─── */
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ─── Count-up number animation ─── */
+@keyframes countGlow {
+  0% {
+    text-shadow: 0 0 8px rgba(79, 70, 229, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 0px rgba(79, 70, 229, 0);
+  }
+}

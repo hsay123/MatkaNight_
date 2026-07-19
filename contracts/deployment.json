@@ -1,0 +1,5 @@
+{
+  "network": "testnet",
+  "contractAddress": "0xabc1234567890defabcdef1234567890abcdef1234567890abcdef1234567890",
+  "deployTxHash": "0xdef1234567890abcdefabcdef1234567890abcdef1234567890abcdef12345"
+}

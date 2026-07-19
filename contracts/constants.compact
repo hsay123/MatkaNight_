@@ -1,0 +1,21 @@
+// Implements PRD §5.1 and §9.1 (Constants)
+pragma language_version >= 0.23.0;
+
+import { ZoneId } from "./types";
+
+export const MIN_BET: Uint<64> = 1;
+export const MAX_BET: Uint<64> = 1000;
+export const NIGHT_STARS_PER_TOKEN: Uint<64> = 1000000;
+export const MIN_BET_STARS: Uint<64> = 1000000;
+export const MAX_BET_STARS: Uint<64> = 1000000000;
+
+// Maximum zones a user can bet on simultaneously
+export const ZONE_MIN: Uint<64> = 1;
+export const ZONE_MAX: Uint<64> = 5;
+
+// Payout rates * 100 (e.g. 3.5x -> 350) to avoid floats
+export const PAYOUT_FACE_CARDS: Uint<64> = 350;
+export const PAYOUT_EXACT_FACE_CARD: Uint<64> = 1200;
+export const PAYOUT_ACES: Uint<64> = 1200;
+export const PAYOUT_NUMBER_CARDS: Uint<64> = 135;
+export const PAYOUT_EXACT_NUMBER_CARD: Uint<64> = 3600;

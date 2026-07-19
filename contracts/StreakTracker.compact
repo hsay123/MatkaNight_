@@ -1,0 +1,19 @@
+// Implements PRD §8.2 (Streak Tracker Circuit)
+pragma language_version >= 0.23.0;
+
+export ledger globalStreakState: Map<Bytes<32>, Uint<64>>;
+
+// Updates the streak based on the round outcome
+// TODO(PRD §8.2): Implement full streak bonus/multiplier logic.
+//   Currently tracks win streaks per player but does not apply any
+//   payout modifier. This must be integrated with the payout calculation
+//   in MainGame before production use.
+export circuit updateStreak(playerIdentifier: Bytes<32>, isWin: Boolean): [] {
+    if (isWin) {
+        let currentStreak = globalStreakState.lookup(playerIdentifier);
+        // Note: Compact might require pattern matching or Option type handling, using simplified logic for mock
+        globalStreakState.insert(playerIdentifier, currentStreak + 1);
+    } else {
+        globalStreakState.insert(playerIdentifier, 0);
+    }
+}

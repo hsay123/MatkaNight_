@@ -1,0 +1,23 @@
+// Implements PRD §8.2 (Shuffle Oracle Circuit)
+pragma language_version >= 0.23.0;
+
+import { Card } from "./types";
+
+export ledger seedCommitment: Bytes<32>;
+
+// commitShuffleSeed circuit: Commits the initial seed (CSPRNG seed + Fisher-Yates setup)
+export circuit commitShuffleSeed(seedHash: Bytes<32>): [] {
+    seedCommitment = disclose(seedHash);
+}
+
+// verifyShuffle: Validates that the drawn card was generated using the committed seed
+// TODO(PRD §8.2): Implement full Fisher-Yates verification logic.
+//   Currently only verifies seed commitment. An unverified shuffle oracle is a
+//   game-integrity issue — this MUST be completed before any real-funds deployment.
+export circuit verifyShuffle(revealedSeed: Bytes<32>, drawnCardRank: Uint<64>, drawnCardSuit: Uint<64>): [] {
+    assert(disclose(sha3_256(revealedSeed) == seedCommitment), "Revealed seed does not match commitment");
+    // KNOWN GAP: Actual Fisher-Yates permutation verification not yet implemented.
+    // The contract currently trusts that the off-chain oracle correctly derived the
+    // drawn card from the committed seed. This must be replaced with on-chain
+    // verification before production use.
+}
