@@ -5,6 +5,7 @@ import { SelectZonesButton } from '../components/ui/select-zones-button';
 import { useGameStore } from '../store/gameStore';
 import type { RoundResult } from '../lib/midnight/types';
 import bgGradient from '../assets/blueg.png';
+import greenGradient from '../assets/Green.jpeg';
 
 function RoundHistoryCard({ round }: { round: RoundResult }) {
   const timeAgo = Math.floor((Date.now() - round.timestamp) / 60000);
@@ -173,7 +174,12 @@ export function DashboardScreen() {
             </div>
 
             {/* Zone Odds — mint green */}
-            <div className="bg-[#E5F5ED] text-slate-900 rounded-2xl p-6 shadow-sm">
+            <div className="relative overflow-hidden z-0 text-slate-900 rounded-2xl p-6 shadow-sm">
+              {/* Rotated Background Image Layer */}
+              <div 
+                className="absolute -inset-[50%] -z-10 bg-cover bg-center -rotate-90 opacity-90"
+                style={{ backgroundImage: `url(${greenGradient})` }}
+              />
               <h3 className="font-[family-name:var(--font-display)] font-semibold text-sm text-slate-600 mb-3 uppercase tracking-wider">Zone Odds</h3>
               <div className="space-y-2">
                 {[
