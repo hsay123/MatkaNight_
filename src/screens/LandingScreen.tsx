@@ -10,10 +10,10 @@ import { RotatingText } from '../components/ui/RotatingText';
 import { useGameStore } from '../store/gameStore';
 
 const HERO_CARDS = [
-  { rank: 'K', suit: '♠', position: 'top-[10%] left-[8%] md:top-[10%] md:left-[10%]', rotate: '-rotate-[12deg]', animDelay: '0s', mobileHide: false },
-  { rank: 'A', suit: '♥', position: 'bottom-[15%] left-[5%] md:bottom-[15%] md:left-[12%]', rotate: 'rotate-[10deg]', animDelay: '1.2s', mobileHide: true },
-  { rank: 'Q', suit: '♦', position: 'top-[8%] right-[5%] md:top-[15%] md:right-[10%]', rotate: 'rotate-[15deg]', animDelay: '0.6s', mobileHide: false },
-  { rank: '7', suit: '♣', position: 'bottom-[18%] right-[8%] md:bottom-[20%] md:right-[12%]', rotate: '-rotate-[8deg]', animDelay: '1.8s', mobileHide: true },
+  { rank: 'K', suit: '♠', position: 'top-[10%] left-[5%]', rotate: '-rotate-[12deg]', animDelay: '0s', mobileHide: false },
+  { rank: 'A', suit: '♥', position: 'bottom-[10%] left-[5%]', rotate: 'rotate-[10deg]', animDelay: '1.2s', mobileHide: true },
+  { rank: 'Q', suit: '♦', position: 'top-[10%] right-[5%]', rotate: 'rotate-[15deg]', animDelay: '0.6s', mobileHide: false },
+  { rank: '7', suit: '♣', position: 'bottom-[10%] right-[5%]', rotate: '-rotate-[8deg]', animDelay: '1.8s', mobileHide: true },
 ];
 
 const LIVE_STATS = [
@@ -129,7 +129,7 @@ export function LandingScreen() {
             }}
           >
             <div
-              className="hero-card w-[72px] h-[104px] sm:w-[88px] sm:h-[128px] md:w-[112px] md:h-[160px] rounded-xl overflow-hidden relative"
+              className="hero-card w-[clamp(80px,8vw,140px)] aspect-[5/7] rounded-xl overflow-hidden relative"
             >
               <span
                 className="absolute top-2 left-2.5 text-[10px] sm:text-xs md:text-sm font-bold font-[family-name:var(--font-display)]"
