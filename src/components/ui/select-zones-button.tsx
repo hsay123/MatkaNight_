@@ -8,7 +8,7 @@ export const SelectZonesButton = React.forwardRef<HTMLButtonElement, React.Butto
       <button
         ref={ref}
         className={cn(
-          "relative group flex items-center h-12 rounded-full bg-[#5047e4] pe-14 ps-6 text-white shadow-md transition-all duration-500 cursor-pointer hover:bg-[#433ac4] hover:ps-14 hover:pe-6 overflow-hidden w-fit",
+          "relative group/btn flex items-center h-12 rounded-full bg-[#5047e4] pe-14 ps-6 text-white shadow-md transition-all duration-500 cursor-pointer hover:bg-[#433ac4] hover:ps-14 hover:pe-6 overflow-hidden w-fit",
           className
         )}
         {...props}
@@ -17,7 +17,7 @@ export const SelectZonesButton = React.forwardRef<HTMLButtonElement, React.Butto
           Select Zones
         </span>
 
-        <div className="absolute right-1 top-1 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#5047e4] transition-all duration-500 group-hover:right-[calc(100%-44px)]">
+        <div className="absolute right-1 top-1 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#5047e4] transition-all duration-500 group-hover/btn:right-[calc(100%-44px)]">
           <ArrowRight size={18} strokeWidth={2.5} />
         </div>
       </button>
