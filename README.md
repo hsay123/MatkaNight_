@@ -2,6 +2,8 @@
 
 A privacy-first card prediction game built on the **Midnight Network**, using zero-knowledge proofs to let players bet, shuffle, and win without revealing their gameplay history on-chain.
 
+This project is built on the Midnight Network.
+
 ![Architecture](./architecture_image/architecture.png)
 
 > See [How to embed the image](#embedding-the-architecture-diagram) below if the image above doesn't render yet.
