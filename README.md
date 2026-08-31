@@ -1,6 +1,6 @@
 # MatkaNight (ZeroCard)
 
-A privacy-first card prediction game built on the **Midnight Network**, using zero-knowledge proofs to let players bet, shuffle, and win without revealing their gameplay history on-chain.
+A card prediction game built on the **Midnight Network**, using Compact smart contracts for bet commit-and-settle on-chain.
 
 This project is built on the Midnight Network.
 
@@ -10,7 +10,21 @@ This project is built on the Midnight Network.
 
 ## Overview
 
-Players pick a betting zone, commit a bet, and draw a card from a provably-fair shuffle — all verified through ZK circuits rather than trusting a centralized server. Bets, payouts, and win-streaks are settled through Compact smart contracts deployed on the Midnight ledger.
+Players pick a betting zone, place a bet, and draw a card to see if they win. Bet commitments and payouts are settled through Compact smart contracts deployed on the Midnight ledger.
+
+**What works today:**
+
+- Wallet connection via the Midnight DApp Connector API
+- Placing bets that commit a hash to the on-chain ledger
+- Card draw and win/loss evaluation
+- On-chain payout settlement (caller supplies the payout amount)
+
+**Known limitations (not yet implemented):**
+
+- Bet amounts are disclosed on-chain during `placeBet` — they are not private
+- Card randomness uses `Math.random()` client-side, not a cryptographically secure source
+- Payout calculation happens off-chain; `revealAndSettle` accepts a caller-supplied payout rather than deriving it from verified on-chain game logic
+- The shuffle verification circuit (`ShuffleOracle.compact`) and win-streak tracker (`StreakTracker.compact`) are not yet integrated into the live game
 
 ## Tech Stack
 
@@ -27,9 +41,9 @@ MatkaNight_/
 │   ├── types.compact           # Shared enums/structs (Card, ZoneId, Bet)
 │   ├── constants.compact       # MIN_BET, MAX_BET, payout rates
 │   ├── MatkaNightGame.compact  # Core game logic (placeBet, revealAndSettle)
-│   ├── ShuffleOracle.compact   # Provably-fair shuffle (commitShuffleSeed, verifyShuffle)
+│   ├── ShuffleOracle.compact   # (WIP) Shuffle seed commitment and verification
 │   ├── Treasury.compact        # House bankroll custody, escrow, payouts
-│   ├── StreakTracker.compact   # Private win-streak proof
+│   ├── StreakTracker.compact   # (WIP) Win-streak tracking
 │   └── deploy.ts                # Multi-network deploy script
 ├── dist_contracts/         # Compiled contract output
 ├── public/artifacts/       # Compiled Compact circuit artifacts
@@ -47,14 +61,14 @@ MatkaNight_/
 
 ## Smart Contracts
 
-| Contract | Purpose |
-|---|---|
-| `types.compact` | Shared enums and structs used across the game |
-| `constants.compact` | Global rules — min/max bet, per-zone payout rates |
-| `MatkaNightGame.compact` | `placeBet` commits a hashed bet to the ledger; `revealAndSettle` verifies it against the commitment and settles payouts |
-| `ShuffleOracle.compact` | `commitShuffleSeed` registers a CSPRNG seed hash before a draw; `verifyShuffle` checks the revealed seed against it |
-| `Treasury.compact` | Escrows the house bankroll and executes payouts |
-| `StreakTracker.compact` | Maintains a private streak counter — proves win-streaks without revealing full gameplay history |
+| Contract | Purpose | Status |
+|---|---|---|
+| `types.compact` | Shared enums and structs used across the game | Live |
+| `constants.compact` | Global rules — min/max bet, per-zone payout rates | Live |
+| `MatkaNightGame.compact` | `placeBet` commits a hashed bet to the ledger; `revealAndSettle` verifies it against the commitment and settles payouts | Live |
+| `ShuffleOracle.compact` | Shuffle seed commitment and verification | WIP — not called from frontend |
+| `Treasury.compact` | Escrows the house bankroll and executes payouts | Live |
+| `StreakTracker.compact` | Win-streak tracking per player | WIP — not called from frontend |
 
 ## Getting Started
 
@@ -106,7 +120,7 @@ The app is organized into four layers:
 
 1. **Frontend** — 14 React screens driven by a single Zustand store
 2. **Midnight Integration Layer** (`src/lib/midnight/`) — wallet connection, contract calls, and chain providers, backed by a local LevelDB private-state store
-3. **Compact Smart Contracts** — game logic, shuffle oracle, treasury, and streak tracking, deployed to the Midnight ledger
+3. **Compact Smart Contracts** — game logic, treasury, and (planned) shuffle oracle and streak tracking, deployed to the Midnight ledger
 4. **Midnight Network** — Proof Server, Indexer, and Node
 
 See the diagram at the top of this file for the full flow.
